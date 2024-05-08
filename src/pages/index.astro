@@ -1,0 +1,116 @@
+---
+import Button from "../components/Button.astro";
+import Input from "../components/Input.astro";
+import Label from "../components/Label.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Welcome to Astro.">
+		<form method="post">
+			<Label>
+				<span>Name</span>
+				<Input type="text" inputmode="text" autocomplete="name" aria-required="true" helpText="Your full name, including any middle names" />
+			</Label>
+
+			<Label>
+				<span>Email</span>
+				<Input type="email" inputmode="email" autocomplete="email" aria-required="true" />
+			</Label>
+
+			<Label>
+				<span>Password</span>
+				<Input type="password" inputmode="text" autocomplete="new-password" aria-required="true" />
+			</Label>
+
+			<Label>
+				<span>Password confirmation</span>
+				<Input type="password" inputmode="text" autocomplete="new-password" aria-required="true" />
+			</Label>
+
+			<Button type="submit">Submit</Button>
+		</form>
+</Layout>
+
+<script>
+	const forms = document.querySelectorAll("form");
+	forms.forEach((form) => {
+		const elements = Array.from(form.elements) as Array<HTMLInputElement | HTMLButtonElement>;
+
+		form.addEventListener('submit', (event) => {
+			event.preventDefault();
+			
+			elements.forEach((element) => {
+				if (element.tagName === 'INPUT' && element.value === '') {
+					element.setCustomValidity('This field is required');
+
+					const p = element.parentNode?.querySelector('p[role=alert]')
+					if (p) {
+						p.textContent = 'This field is required';
+					}
+				}
+			})
+		})
+	})
+
+	const passwordInputs = document.querySelectorAll<HTMLInputElement>('input[type=password]');
+	passwordInputs[0]?.addEventListener('input', (event) => {
+		const target = event.target as HTMLInputElement;
+		// console.log(event.target?.value);
+
+		if (target?.value?.length) {
+		const div = document.createElement('div');
+		div.style.display = 'grid';
+		div.style.gridTemplateColumns = 'repeat(4, 1fr)';
+		div.style.gap = '0.25rem';
+		div.style.height = '0.5rem';
+
+		if (target?.value?.length >= 8) {
+			const passwordLengthSpan = document.querySelector<HTMLDivElement>('#password-length');
+			if (passwordLengthSpan) {
+				return;
+			} else {
+				const span = document.createElement('span');
+				span.id = 'password-length';
+				span.style.backgroundColor = 'green';
+				div.appendChild(span);
+			}
+			passwordInputs[0]?.parentNode?.append(div);
+		} else {
+			document.querySelector('#password-length')?.remove();
+		}
+
+	if (target?.value.match(/(\*)+/g)) {
+			const specialCharSpan = document.querySelector<HTMLDivElement>('#special-char');
+			if (specialCharSpan) {
+				return;
+			} else {
+				const span = document.createElement('span');
+				span.id = 'special-char';
+				span.style.backgroundColor = 'green';
+				div.appendChild(span);
+			}
+			passwordInputs[0]?.parentNode?.append(div);
+		} else {
+			const span = document.querySelector('#special-char')
+			span?.remove();
+		}
+	}		
+	})
+</script>
+
+<style>
+	main {
+		inline-size: 70rem;
+		margin-inline: auto;
+		padding-block: 10rem;
+	}
+
+	form > * + * {
+		margin-top: 2rem;
+	}
+
+	form {
+		inline-size: 30rem;
+		margin-inline: auto;
+	}
+</style>
