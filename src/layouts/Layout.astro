@@ -103,6 +103,53 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     margin-inline: auto;
 	}
 
+	button {
+		padding: 0.5rem 1rem;
+		border-radius: 0.25rem;
+		border: 1px solid var(--clr-primary-light);
+		cursor: pointer;
+		font-size: 1rem;
+		font-weight: bold;
+		transition: background-color 0.2s ease-in-out;
+		color: var(--clr-primary);
+		background-color: var(--clr-primary-light);
+
+		&:focus-visible {
+			outline: 2px solid var(--clr-primary);
+		}
+	}
+
+	input {
+		inline-size: 100%;
+		padding: 0.5rem 1rem;
+		border: 1px solid gray;
+		border-radius: 0.25rem;
+
+		&:focus-visible {
+			border: 1px solid transparent;
+			outline: 2px solid var(--clr-primary);
+		}
+
+		&:invalid {
+			border: 1px solid red;
+
+			&:focus-visible {
+				outline: 2px solid red;
+			}
+		}
+	}
+
+	label:has(span + input), label:has(span + textarea), label:has(span + show-password) {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  label:has(span) {
+    span:first-of-type {
+      font-weight: 600;
+    }
+  }
+
 	p[data-hint-text] {
     font-size: 0.875rem;
 	}

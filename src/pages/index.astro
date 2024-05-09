@@ -1,40 +1,37 @@
 ---
 import PasswordQuality from "@/components/PasswordQuality.astro";
 import ShowPassword from "@/components/ShowPassword.astro";
-import Button from "../components/Button.astro";
-import Input from "../components/Input.astro";
-import Label from "../components/Label.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Welcome to Astro.">
 	<h1>Forms</h1>
 	<form method="post">
-		<Label>
+		<label>
 			<span>Name</span>
-			<Input type="text" name="name" inputmode="text" autocomplete="name" aria-required="true" />
+			<input type="text" name="name" inputmode="text" autocomplete="name" aria-required="true" />
 			<p data-hint-text>Your full name, including any middle names</p>
-		</Label>
+		</label>
 
-		<Label>
+		<label>
 			<span>Email</span>
-			<Input type="email" name="email" inputmode="email" autocomplete="email" aria-required="true" />
-		</Label>
+			<input type="email" name="email" inputmode="email" autocomplete="email" aria-required="true" />
+		</label>
 
-		<Label>
+		<label>
 			<span>Password</span>
 			<ShowPassword>
-				<Input type="password" name="password" inputmode="text" autocomplete="new-password" aria-required="true" />
+				<input type="password" name="password" inputmode="text" autocomplete="new-password" aria-required="true" />
 			</ShowPassword>
 			<PasswordQuality />
-		</Label>
+		</label>
 
-		<Label>
+		<label>
 			<span>Password confirmation</span>
-			<Input type="password" name="confirmPassword" inputmode="text" autocomplete="new-password" aria-required="true" />
-		</Label>
+			<input type="password" name="confirmPassword" inputmode="text" autocomplete="new-password" aria-required="true" />
+		</label>
 
-		<Button type="submit">Submit</Button>
+		<button type="submit">Submit</button>
 	</form>
 </Layout>
 
