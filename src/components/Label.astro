@@ -9,7 +9,7 @@ const { class: className, ...attrs } = Astro.props;
 <label class:list={[className]} {...attrs}><slot/></label>
 
 <style>
-  label:has(span + input), label:has(span + textarea) {
+  label:has(span + input), label:has(span + textarea), label:has(span + show-password) {
     display: grid;
     gap: 0.25rem;
   }

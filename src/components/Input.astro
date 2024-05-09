@@ -2,8 +2,8 @@
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"input"> {
-	errorText?: string;
-	helpText?: string;
+  errorText?: string;
+  helpText?: string;
 }
 
 const { class: className, helpText, errorText, ...props } = Astro.props;
@@ -13,11 +13,6 @@ const { class: className, helpText, errorText, ...props } = Astro.props;
   class:list={[className]}
   {...props}
 />
-
-<div class="messages">
-  <p>{helpText}</p>
-  <p role="alert">{errorText}</p>
-</div>
 
 <script>
   import autoAnimate from '@formkit/auto-animate';
